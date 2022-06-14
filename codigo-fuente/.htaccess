@@ -1,0 +1,6 @@
+RewriteEngine on
+RewriteCond $1 !^(index\.php|img|assets|fonts|css|font-awesome|js|robots\.txt)
+RewriteRule ^(.*)$ /agrocisa-v2.1/codigo-fuente/index.php/$1 [L]
+#RewriteRule ^(.*)$ /pruebas/index.php/$1 [L]
+php_value memory_limit 1000M 
+php_value max_execution_time 6000000
