@@ -1,0 +1,283 @@
+<?php
+$strCadenaSQL ="INSERT INTO ".$predb."movimientos_almacen_refacciones (mov_alm_ref_id, sucursal_id, ";
+$strCadenaSQL.="            mov_alm_ref_tipo_id, folio, fecha, fecha_vencimiento, referencia_id, ";
+$strCadenaSQL.="            factura, moneda_tipo, tipo_cambio, observaciones, estatus_id, ";
+$strCadenaSQL.="            forma_pago_id, metodo_pago_id, uso_cfdi_id, tipo_relacion_id, ";
+$strCadenaSQL.="            certificado_serie, numero_aprobacion, anio_aprobacion, cadena_original, ";
+$strCadenaSQL.="            sello_digital, uuid, fecha_timbrado, certificado_sat, sello_sat, ";
+$strCadenaSQL.="            leyenda_sat, pac_rfc, usuario_id, fecha_movimiento) ";
+$strCadenaSQL.="VALUES ('".$strMovAlmID."', '".$SucursalID."', ".$MovAlmRefTipoID.", '".$strFolio."', ";
+$strCadenaSQL.="        '".$Fecha."', '".$FechaVencimiento."', '".$ReferenciaID."', '".$Factura."', ";
+$strCadenaSQL.="        '".$MonedaTipo."', ".$TipoCambio.", '".utf8_decode($Observaciones)."', ";
+$strCadenaSQL.="         ".$EstatusID.", ".$FormaPagoID.", ".$MetodoPagoID.", ".$UsoCFDIID.", ";
+$strCadenaSQL.="         ".$TipoRelacionID.", _utf8'', ".$rowTmp["numero_aprobacion"].", ";
+$strCadenaSQL.="        '".$rowTmp["anio_aprobacion"]."', _utf8'', _utf8'', _utf8'', _utf8'', ";
+$strCadenaSQL.="         _utf8'', _utf8'', _utf8'', _utf8'', ".$UsuarioID.", NOW())";
+if(mysql_query($strCadenaSQL)){
+	$vecRenglones = explode("|", $Renglones);
+	$vecRefacciones = explode("|", $RefaccionesID);
+	$vecCantidades = explode("|", $Cantidades);
+	$vecCostos = explode("|", $Costos);
+	$vecIVAS = explode("|", $IVAS);
+	$vecIEPS = explode("|", $IEPS);
+	$vecDescuentos = explode("|", $Descuentos);
+	$vecPrecios = explode("|", $Precios);
+	$intCont = 0;
+	$strAnio = substr($Fecha, 0, 4);
+	while ($intCont < count($vecRefacciones)){
+		$numRenglon = current($vecRenglones);
+		$strRefaccion = current($vecRefacciones);
+		$numCantidad = current($vecCantidades);
+		$numCosto = current($vecCostos);
+		$numIVA = current($vecIVAS);
+		$numIEPS = current($vecIEPS);
+		$numDescuento = current($vecDescuentos);
+		$numPrecio = current($vecPrecios);
+		if ($MonedaTipo == "D"){
+			$numCosto = $TipoCambio * $numCosto;
+			$numIVA = $TipoCambio * $numIVA;
+			$numIEPS = $TipoCambio * $numIEPS;
+			$numDescuento = $TipoCambio * $numDescuento;
+			$numPrecio = $TipoCambio * $numPrecio;
+		}
+		$strCadenaSQL ="INSERT INTO ".$predb."movimientos_almacen_refacciones_detalles (mov_alm_ref_id, ";
+		$strCadenaSQL.="       renglon, refaccion_id, cantidad, costo_unitario, iva_unitario, ";
+		$strCadenaSQL.="       ieps_unitario, descuento_unitario, precio_unitario) ";
+		$strCadenaSQL.="VALUES ('".$strMovAlmID."', ".$numRenglon.", '".$strRefaccion."', ".$numCantidad.", ";
+		$strCadenaSQL.="         ".$numCosto.", ".$numIVA.", ".$numIEPS.", ".$numDescuento.", ".$numPrecio.")";
+		if (!mysql_query($strCadenaSQL)){
+			mysql_query("ROLLBACK");
+			$strCadena = "&strFolio=0";
+			echo utf8_encode($strCadena);
+			exit;
+		}
+		$strCadenaSQL ="SELECT actual_existencia, actual_costo ";
+		$strCadenaSQL.="FROM   ".$predb."refacciones_inventario ";
+		$strCadenaSQL.="WHERE  sucursal_id = '".$SucursalID."' ";
+		$strCadenaSQL.="AND    anio = '".$strAnio."' ";
+		$strCadenaSQL.="AND    refaccion_id = '".$strRefaccion."'";
+		$varResultado = mysql_query($strCadenaSQL);
+		if (mysql_num_rows($varResultado) > 0){
+			$rstResultado = mysql_fetch_array($varResultado);
+			$numExistencia = $rstResultado["actual_existencia"];
+			$numCostoActual = $rstResultado["actual_costo"];
+		}
+		if ($MovAlmRefTipoID <= 5){
+			if (($numExistencia + $numCantidad) != 0){
+				$numCostoActual = (($numCostoActual * $numExistencia) + ($numCosto * $numCantidad)) / ($numExistencia + $numCantidad);
+			}
+			else{
+				$numCostoActual = $numCosto;
+			}
+			$numExistencia += $numCantidad;
+		}
+		else{
+			if (($numExistencia - $numCantidad) != 0){
+				$numCostoActual = (($numCostoActual * $numExistencia) - ($numCosto * $numCantidad)) / ($numExistencia - $numCantidad);
+			}
+			else{
+				$numCostoActual = $numCosto;
+			}
+			$numExistencia -= $numCantidad;
+		}
+		$strCadenaSQL ="UPDATE ".$predb."refacciones_inventario ";
+		$strCadenaSQL.="SET    actual_existencia = ".$numExistencia.", actual_costo = ".$numCostoActual." ";
+		$strCadenaSQL.="WHERE  sucursal_id = '".$SucursalID."' ";
+		$strCadenaSQL.="AND    anio = '".$strAnio."' ";
+		$strCadenaSQL.="AND    refaccion_id = '".$strRefaccion."'";
+		if (!mysql_query($strCadenaSQL)){
+			mysql_query("ROLLBACK");
+			$strCadena = "&strFolio=0";
+			echo utf8_encode($strCadena);
+			exit;
+		}
+
+
+
+
+
+
+
+
+
+
+
+******************************************************************************************************************************************EDICIÓN
+
+		case "Modificar":
+			mysql_query("BEGIN");
+			$strCadenaSQL ="UPDATE ".$predb."movimientos_almacen_refacciones ";
+			$strCadenaSQL.="SET    fecha = '".$Fecha."', fecha_vencimiento = '".$FechaVencimiento."', ";
+			$strCadenaSQL.="       referencia_id = '".$ReferenciaID."', factura = '".$Factura."', ";
+			$strCadenaSQL.="       moneda_tipo = '".$MonedaTipo."', tipo_cambio = ".$TipoCambio.", ";
+			$strCadenaSQL.="       observaciones = '".utf8_decode($Observaciones)."', ";
+			$strCadenaSQL.="       usuario_id = ".$UsuarioID.", fecha_movimiento = NOW() ";
+			$strCadenaSQL.="WHERE  mov_alm_ref_id = '".$MovAlmRefID."'";
+			if (!mysql_query($strCadenaSQL)){
+				mysql_query("ROLLBACK");
+				$strCadena = "&strFolio=0";
+				echo utf8_encode($strCadena);
+				exit;
+			}
+			$strAnio = substr($Fecha, 0, 4);
+			$strCadenaSQL ="SELECT renglon, refaccion_id, cantidad ";
+			$strCadenaSQL.="FROM   ".$predb."movimientos_almacen_refacciones_detalles ";
+			$strCadenaSQL.="WHERE  mov_alm_ref_id = '".$MovAlmRefID."'";
+			$varDetalles = mysql_query($strCadenaSQL);
+			
+			while($row = mysql_fetch_array($varDetalles)){
+				$strCadenaSQL ="SELECT inicial_existencia, inicial_costo ";
+				$strCadenaSQL.="FROM   ".$predb."refacciones_inventario ";
+				$strCadenaSQL.="WHERE  sucursal_id = '".$SucursalID."' ";
+				$strCadenaSQL.="AND    anio = '".$strAnio."' ";
+				$strCadenaSQL.="AND    refaccion_id = '".$row["refaccion_id"]."'";
+				$varTemporal = mysql_query($strCadenaSQL);
+				$rstResultado = mysql_fetch_array($varTemporal);
+				mysql_free_result($varTemporal);
+				$numExistencia = $rstResultado["inicial_existencia"];
+				$numCosto = $rstResultado["inicial_costo"];
+				$strCadenaSQL ="SELECT 1 AS Tipo, MAR.mov_alm_ref_tipo_id, MAR.fecha, MAR.fecha_movimiento, MARD.renglon, MARD.cantidad, MARD.costo_unitario ";
+				$strCadenaSQL.="FROM   ".$predb."movimientos_almacen_refacciones MAR, ".$predb."movimientos_almacen_refacciones_detalles MARD ";
+				$strCadenaSQL.="WHERE  MARD.refaccion_id = '".$row["refaccion_id"]."' ";
+				$strCadenaSQL.="AND    MARD.mov_alm_ref_id = MAR.mov_alm_ref_id ";
+				$strCadenaSQL.="AND    MAR.sucursal_id = '".$SucursalID."' ";
+				$strCadenaSQL.="AND    MAR.fecha >= '".$strAnio."-01-01' ";
+				$strCadenaSQL.="AND    MAR.fecha <= '".$strAnio."-12-31' ";
+				$strCadenaSQL.="AND    MAR.estatus_id <> 2 ";
+				$strCadenaSQL.="AND    MAR.mov_alm_ref_id <> '".$MovAlmRefID."' ";
+				$strCadenaSQL.="UNION ";
+				$strCadenaSQL.="SELECT 2 AS Tipo, 2 AS mov_alm_ref_tipo_id, MVR.fecha, MVR.fecha_movimiento, MVRD.renglon, MVRD.cantidad, MVRD.costo_unitario ";
+				$strCadenaSQL.="FROM   ".$predb."movimientos_ventas_refacciones MVR, ".$predb."movimientos_ventas_refacciones_detalles MVRD ";
+				$strCadenaSQL.="WHERE  MVRD.refaccion_id = '".$row["refaccion_id"]."' ";
+				$strCadenaSQL.="AND    MVRD.mov_venta_ref_id = MVR.mov_venta_ref_id ";
+				$strCadenaSQL.="AND    MVR.sucursal_id = '".$SucursalID."' ";
+				$strCadenaSQL.="AND    MVR.fecha >= '".$strAnio."-01-01' ";
+				$strCadenaSQL.="AND    MVR.fecha <= '".$strAnio."-12-31' ";
+				$strCadenaSQL.="AND    MVR.estatus_id <> 2 ";
+				$strCadenaSQL.="ORDER BY fecha, fecha_movimiento";
+				$varRes = mysql_query($strCadenaSQL);
+				while($rowSec = mysql_fetch_array($varRes)){
+					if ($rowSec["Tipo"] == 1){
+						if ($rowSec["mov_alm_ref_tipo_id"] <= 5){
+							$numCosto = (($numExistencia * $numCosto) + ($rowSec["cantidad"] * $rowSec["costo_unitario"]));
+							$numExistencia += $rowSec["cantidad"];
+							if ($numExistencia <> 0){
+								$numCosto = $numCosto / $numExistencia;
+							}
+						}
+						else{
+							$numCosto = (($numExistencia * $numCosto) - ($rowSec["cantidad"] * $rowSec["costo_unitario"]));
+							$numExistencia -= $rowSec["cantidad"];
+							if ($numExistencia <> 0){
+								$numCosto = $numCosto / $numExistencia;
+							}
+						}
+					}
+					else{
+						$numCosto = (($numExistencia * $numCosto) - ($rowSec["cantidad"] * $rowSec["costo_unitario"]));
+						$numExistencia -= $rowSec["cantidad"];
+						if ($numExistencia <> 0){
+							$numCosto = $numCosto / $numExistencia;
+						}
+					}
+				}
+				mysql_free_result($varRes);
+				$strCadenaSQL ="UPDATE ".$predb."refacciones_inventario ";
+				$strCadenaSQL.="SET    actual_existencia = ".$numExistencia.", actual_costo = ".$numCosto." ";
+				$strCadenaSQL.="WHERE  sucursal_id = '".$SucursalID."' ";
+				$strCadenaSQL.="AND    anio = '".$strAnio."' ";
+				$strCadenaSQL.="AND    refaccion_id = '".$row["refaccion_id"]."'";
+				if (!mysql_query($strCadenaSQL)){
+					mysql_query("ROLLBACK");
+					$strCadena = "&strFolio=0";
+					echo utf8_encode($strCadena);
+					exit;
+				}
+			}
+			mysql_free_result($varDetalles);
+			$strCadenaSQL ="DELETE FROM ".$predb."movimientos_almacen_refacciones_detalles ";
+			$strCadenaSQL.="WHERE  mov_alm_ref_id = '".$MovAlmRefID."'";
+			if (!mysql_query($strCadenaSQL)){
+				mysql_query("ROLLBACK");
+				$strCadena = "&strFolio=0";
+				echo utf8_encode($strCadena);
+				exit;
+			}
+			$vecRenglones = explode("|", $Renglones);
+			$vecRefacciones = explode("|", $RefaccionesID);
+			$vecCantidades = explode("|", $Cantidades);
+			$vecCostos = explode("|", $Costos);
+			$vecIVAS = explode("|", $IVAS);
+			$vecIEPS = explode("|", $IEPS);
+			$vecDescuentos = explode("|", $Descuentos);
+			$vecPrecios = explode("|", $Precios);
+			$intCont = 0;
+			while ($intCont < count($vecRefacciones)){
+				$numRenglon = current($vecRenglones);
+				$strRefaccion = current($vecRefacciones);
+				$numCantidad = current($vecCantidades);
+				$numCosto = current($vecCostos);
+				$numIVA = current($vecIVAS);
+				$numIEPS = current($vecIEPS);
+				$numDescuento = current($vecDescuentos);
+				$numPrecio = current($vecPrecios);
+				if ($MonedaTipo == "D"){
+					$numCosto = $TipoCambio * $numCosto;
+					$numIVA = $TipoCambio * $numIVA;
+					$numIEPS = $TipoCambio * $numIEPS;
+					$numDescuento = $TipoCambio * $numDescuento;
+					$numPrecio = $TipoCambio * $numPrecio;
+				}
+				$strCadenaSQL ="INSERT INTO ".$predb."movimientos_almacen_refacciones_detalles (mov_alm_ref_id, renglon, ";
+				$strCadenaSQL.="       refaccion_id, cantidad, costo_unitario, iva_unitario, ieps_unitario, descuento_unitario, precio_unitario) ";
+				$strCadenaSQL.="VALUES ('".$MovAlmRefID."', ".$numRenglon.", '".$strRefaccion."', ".$numCantidad.", ".$numCosto.", ";
+				$strCadenaSQL.="         ".$numIVA.", ".$numIEPS.", ".$numDescuento.", ".$numPrecio.")";
+				if (!mysql_query($strCadenaSQL)){
+					mysql_query("ROLLBACK");
+					$strCadena = "&strFolio=0";
+					echo utf8_encode($strCadena);
+					exit;
+				}
+				$strCadenaSQL ="SELECT actual_existencia, actual_costo ";
+				$strCadenaSQL.="FROM   ".$predb."refacciones_inventario ";
+				$strCadenaSQL.="WHERE  sucursal_id = '".$SucursalID."' ";
+				$strCadenaSQL.="AND    anio = '".$strAnio."' ";
+				$strCadenaSQL.="AND    refaccion_id = '".$strRefaccion."'";
+				$varResultado = mysql_query($strCadenaSQL);
+				if (mysql_num_rows($varResultado) > 0){
+					$rstResultado = mysql_fetch_array($varResultado);
+					$numExistencia = $rstResultado["actual_existencia"];
+					$numCostoActual = $rstResultado["actual_costo"];
+				}
+				if ($MovAlmRefTipoID <= 5){
+					if (($numExistencia + $numCantidad) != 0){
+						$numCostoActual = (($numCostoActual * $numExistencia) + ($numCosto * $numCantidad)) / ($numExistencia + $numCantidad);
+					}
+					else{
+						$numCostoActual = $numCosto;
+					}
+					$numExistencia += $numCantidad;
+				}
+				else{
+					if (($numExistencia - $numCantidad) != 0){
+						$numCostoActual = (($numCostoActual * $numExistencia) - ($numCosto * $numCantidad)) / ($numExistencia - $numCantidad);
+					}
+					else{
+						$numCostoActual = $numCosto;
+					}
+					$numExistencia -= $numCantidad;
+				}
+				$strCadenaSQL ="UPDATE ".$predb."refacciones_inventario ";
+				$strCadenaSQL.="SET    actual_existencia = ".$numExistencia.", actual_costo = ".$numCostoActual." ";
+				$strCadenaSQL.="WHERE  sucursal_id = '".$SucursalID."' ";
+				$strCadenaSQL.="AND    anio = '".$strAnio."' ";
+				$strCadenaSQL.="AND    refaccion_id = '".$strRefaccion."'";
+				if (!mysql_query($strCadenaSQL)){
+					mysql_query("ROLLBACK");
+					$strCadena = "&strFolio=0";
+					echo utf8_encode($strCadena);
+					exit;
+				}
+
+
+?>
