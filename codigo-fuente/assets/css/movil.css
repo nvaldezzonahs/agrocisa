@@ -1,0 +1,1993 @@
+/*----------------------------------------------------------------- GLOBAL */
+/* Reset */
+*,
+*:after,
+*:before {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+body,html{
+	margin: 0; padding: 0;
+	width: 100%; height: 100%;
+}
+a,a:hover,p,h1,h2,h3,h4,h5,h6{
+	color: #444747;
+}
+a:hover{
+	text-decoration: none;
+}
+.clearfix:before,
+.clearfix:after {
+  content: " ";
+  display: table;
+}
+
+.clearfix:after {
+  clear: both;
+}
+textarea {
+    resize: none;
+}
+/*----------------------------------------------------------------- THEME */
+body{
+	/* Fondo de Pantalla */
+	background: url('../images/misc/wallpaper.jpg')  no-repeat center center fixed;
+	background-color: #004E8A;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+	filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/misc/wallpaper.jpg', sizingMethod='scale');
+	-ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/misc/wallpaper.jpg', sizingMethod='scale')";
+	/* Estilo de Fuente */
+	font-family: 'Ubuntu', sans-serif;
+}
+
+/*----------------------------------------------------------------- HEADER */
+header{
+	position: fixed;
+	height: 55px; width: 100%;
+	background: url('../images/gui/bar_bottom.png') fixed;
+	/* Sombra Inferior */
+	-webkit-box-shadow: 0px 2px 2px 0px rgba(50, 50, 50, 0.75);
+	-moz-box-shadow:    0px 2px 2px 0px rgba(50, 50, 50, 0.75);
+	box-shadow:         0px 2px 2px 0px rgba(50, 50, 50, 0.75);
+	z-index: 1;
+	top: 0;
+}
+header a{
+	display: block;
+	width: 50px; height: 40px;
+	line-height: 42px;
+	font-size: 32px;
+	text-align: center;
+	margin-top: 8px;
+}
+header a:hover{
+	background: #2c3e50;
+  color:#fff;
+}
+
+/*----------------------------------------------------------------- VENTANA */
+#FakeWindow{
+	position: relative;
+	width: 100%; height: 100%;
+}
+#FakeWindow .FakeWindowContainer{
+ width: 95%;
+  height: 85%;
+  overflow: hidden;
+  margin: auto;
+  position: absolute;
+  top: 55px; left: 0; bottom: 0; right: 0;
+  background-color: white;
+  -webkit-box-shadow: 0px 0px 6px 0px rgba(50, 50, 50, 0.75);
+  -moz-box-shadow:    0px 0px 6px 0px rgba(50, 50, 50, 0.75);
+   box-shadow:         0px 0px 6px 0px rgba(50, 50, 50, 0.75);
+   -webkit-border-radius: 6px;
+	-moz-border-radius: 6px;
+	border-radius: 6px;
+	border: 1px solid black;
+}
+#FakeWindow .FakeWindowHeader{
+	background: #fff url('../images/gui/bar_bottom.png') repeat-x;
+	  border-top-left-radius: 5px;
+	  border-top-right-radius: 5px;
+	  -moz-border-radius-topleft: 5px;
+	  -moz-border-radius-topright: 5px;
+	  -webkit-border-top-left-radius: 5px;
+	  -webkit-border-top-right-radius: 5px;
+	  -webkit-background-clip: padding-box;
+	  color: #323232;
+	  font-weight: 700;
+	  overflow: hidden;
+	  line-height: 40px;
+	  padding: 0 10px;
+	  height: 40px;
+	  font-size: 12px;
+	  border-bottom: 1px solid #bbb;
+}
+
+#FakeWindow .FakeWindowContent{
+	position: absolute;
+	background-color: white;
+  overflow-y: auto;
+  overflow-x: hidden;
+	top: 40px; bottom: 20px; right: 0; left: 0;
+}
+
+#FakeWindow .FakeWindowFooter{
+  display: none;
+	position: absolute;
+  background: white url('../images/gui/bar_top.png') repeat-x left bottom;
+  border-top: 1px solid #bbb;
+  font-size: 11px;
+  font-weight: bold;
+  line-height: 20px;
+  overflow: hidden;
+  text-align: center;
+  text-shadow: #fff 0 1px 1px;
+  height: 20px;
+  left: 1px;
+  right: 1px;
+  bottom: 0px;
+}
+
+#FakeWindow i{
+	font-size: 16px;
+	padding-right:10px;
+}
+#FakeWindow .Title{
+	font-size: 16px;
+	line-height: 40px;
+	font-weight: 400;
+	margin:0; padding: 0;
+}
+
+/* LOGIN
+----------------------------------------------------------------------------------------------------*/
+#login{
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: url('../images/misc/wallpaper.jpg') no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+#login .loginbox{
+  position: absolute;
+  padding: 1em 0em 2em 0em;
+  top: 10px; bottom: 10px; left: 10px; right: 10px;
+  margin: auto;
+  background-color: rgba(255,255,255,1);
+  max-width: 250px;
+  max-height: 315px;
+  -webkit-box-shadow: 0px 0px 5px 0px rgba(50, 50, 50, 0.75);
+  -moz-box-shadow:    0px 0px 5px 0px rgba(50, 50, 50, 0.75);
+  box-shadow:         0px 0px 5px 0px rgba(50, 50, 50, 0.75);
+  border-top: 4px solid;
+  border-bottom: 2px solid;
+  border-image: url('../images/misc/border.png') 1 stretch repeat;
+}
+
+#login .logo{
+  display: block;
+  margin-left:auto; margin-right: auto;
+  width: 100%; height: auto;
+  max-width: 180px;
+  margin-top: 10px;
+}
+
+#login .FormContainer{
+  margin-top: 20px;
+  background-color: #e9e9e9;
+  padding: 1em; padding-bottom: 0;
+  border-top: 1px dotted #b2b2b2;
+  border-bottom: 1px dotted #b2b2b2;
+  border-bottom-left-radius: 1px dotted #b2b2b2;
+}
+
+#login label{
+  font-weight: normal;
+  font-size: 12px;
+  color: #707070;
+}
+
+#login input,#login select{
+  position:relative;
+  width: 100%;
+  height: 35px;
+  font-size: 16px;
+  line-height: 35px;
+  padding: 5px;
+
+  color: #444444;
+  z-index: 1
+  -webkit-border-top-right-radius: 5px;
+  -webkit-border-bottom-right-radius: 5px;
+  -moz-border-radius-topright: 5px;
+  -moz-border-radius-bottomright: 5px;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  border:1px solid #B1B1B1;
+  cursor: text;
+}
+
+#login button{
+  position: relative;
+  margin-left: -0.6em;
+  margin-top: 5px;
+  padding-left: 1em; padding-right: 1em;
+  font-size: 14px;
+  height: 30px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  border:1px solid #A3A3A3;
+}
+
+/*----------------------------------------------------------------- MENU */
+.StartMenu{
+  position: absolute;
+  width: 220px;
+  height: auto;
+  background: #FFF;
+  border-top: 4px solid;
+  border-right: 0px solid;border-left: 0px solid;
+  -webkit-box-shadow: 0px 3px 4px 0px rgba(50, 50, 50, 0.75);
+  -moz-box-shadow:    0px 3px 4px 0px rgba(50, 50, 50, 0.75);
+  box-shadow:         0px 3px 4px 0px rgba(50, 50, 50, 0.75);
+  left: 0; top: 56px;
+  z-index: 500;
+ /*display: none;*/display: none;
+  border-image: url("../images/misc/border.png") 1 stretch repeat;
+}
+.StartMenu .UserInfo{
+
+  background-color: #F0F0F0;
+  border-bottom: 1px dotted #d8d8d8;
+  padding: 1em;
+  height: 30px; width: 100%;
+}
+.StartMenu .UserInfo p{
+  font-size: 14px;
+  text-align: center;
+  color: #323062;
+  font-weight: 700;
+  margin-top: -10px;
+}
+
+.StartMenu .CompanyInfo{
+  position: relative;
+  background: #F0F0F0;
+  padding: 1em;
+  height: 60px;
+}
+.StartMenu .UserImg{
+  position: absolute;
+  top: 20px; left: 0; right: 0;
+  margin:auto;
+  width: 140px; height: 34px;
+}
+
+.StartMenu .ContentMenu{
+
+  width: 100%;
+  height: auto;
+  background-color: #fff;
+}
+
+.StartMenu li{
+  width: 100%; height: 30px;
+  border-bottom: 1px solid #eaeaea;
+  background-color: white;
+  line-height: 30px;
+}
+.StartMenu li a{
+
+  width: 220px;
+  border-left: 4px solid #d9d9d9;
+  padding-left: 10px;
+  color: #696969;
+}
+.StartMenu li a:hover{
+  background-color: #2c3e50;
+  color:#fff;width: 220px;
+  cursor: pointer;
+}
+
+.StartMenu .StartFooter{
+
+  height: 30px; width: 100%;
+  background-color: #eaeaea;
+  border-top: 1px solid #d8d8d8;
+}
+
+.StartMenu .StartFooter a{
+  float:right;
+  width: 24px; height: 24px;
+  border-left: none;
+  color: #2c3e50;
+  font-size: 18px;
+  text-align: center;
+  line-height: 24px;
+  margin-top: 2px;
+  margin-right: 10px;
+}
+.StartMenu .StartFooter a:hover{
+  color: #fff;
+  background-color: #2c3e50;
+}
+
+
+ a.MenuIcon{
+  color: #686868 !important;
+  text-shadow:none;
+  font-size: 16px;
+}
+a.MainIcon{
+  font-size: 22px ;
+    color: #686868 !important;
+  text-shadow:none;
+}
+a.MenuIcon:hover,a.MainIcon:hover{
+  color: #fff !important;
+}
+
+.dl-menuwrapper {
+  width: 100%; height: auto;
+  max-width: 225px;
+  position: relative;
+}
+
+.dl-menuwrapper:first-child {
+  margin-right: 100px;
+}
+
+.dl-menuwrapper ul {
+  padding: 0;
+  list-style: none;
+  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+}
+
+.dl-menuwrapper li {
+  position: relative;
+  height: 30px;
+  border-bottom: 1px solid #eaeaea;
+}
+
+.dl-menuwrapper li a {
+  display: block;
+  position: relative;
+  font-size: 12px;
+  width: 220px;
+  border-left: 4px solid #d9d9d9;
+  padding-left: 10px;
+  color: #696969;
+}
+
+.no-touch .dl-menuwrapper li a:hover {
+  background: #2c3e50;
+  color:#fff;
+}
+
+.dl-menuwrapper li.dl-back > a {
+  padding-left: 30px;
+  background: rgba(0,0,0,0.1);
+}
+
+.dl-menuwrapper li a.dl-back:after,
+.dl-menuwrapper li > a:not(:only-child):after {
+  position: absolute;
+  top: 0;
+  line-height: 30px;
+  font-family: 'FontAwesome';
+  speak: none;
+  color: #696969;
+  font-size: 12px;
+  -webkit-font-smoothing: antialiased;
+  content: "\f061";
+}
+
+.dl-menuwrapper li.dl-back:after {
+  left: 10px;
+  color: #696969;
+  -webkit-transform: rotate(180deg);
+  transform: rotate(180deg);
+}
+.dl-menuwrapper li > a:after {
+  right: 10px;
+  color: rgba(0,0,0,0.15);
+}
+
+.dl-menuwrapper .dl-menu {
+  margin: 0; padding:0;
+  position: relative;
+  width: 100%;height: 100%;
+  /*opacity: 0;
+  pointer-events: none;*/
+  -webkit-transform: translateY(0);
+  transform: translateY(0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.dl-menuwrapper .dl-menu.dl-menu-toggle {
+  transition: all 0.3s ease;
+}
+
+.dl-menuwrapper .dl-menu.dl-menuopen {
+  opacity: 1;
+  pointer-events: auto;
+  -webkit-transform: translateY(0px);
+  transform: translateY(0px);
+}
+
+/* Hide the inner submenus */
+.dl-menuwrapper li .dl-submenu {
+  float: left;  position: relative;
+  display: none;
+}
+/*
+When a submenu is openend, we will hide all li siblings.
+For that we give a class to the parent menu called "dl-subview".
+We also hide the submenu link.
+The opened submenu will get the class "dl-subviewopen".
+All this is done for any sub-level being entered.
+*/
+
+
+.dl-menu.dl-subview li,
+.dl-menu.dl-subview li.dl-subviewopen > a,
+.dl-menu.dl-subview li.dl-subview > a {
+  display: none;
+  height: auto;
+  float: left;  position: relative;
+}
+
+.dl-menu.dl-subview li.dl-subview,
+.dl-menu.dl-subview li.dl-subview .dl-submenu,
+.dl-menu.dl-subview li.dl-subviewopen,
+.dl-menu.dl-subview li.dl-subviewopen > .dl-submenu,
+.dl-menu.dl-subview li.dl-subviewopen > .dl-submenu > li {
+  display: block;
+  height: auto;
+  float: left;  position: relative;
+}
+
+/* Dynamically added submenu outside of the menu context */
+.dl-menuwrapper > .dl-submenu {
+  width: 100%; height: 100%;
+  top: 0;
+  left: 0;
+  margin: 0;
+  float: left;  position: relative;
+  display: none;
+}
+
+/* Animation classes for moving out and in */
+
+.dl-menu.dl-animate-out-1 {
+  -webkit-animation: MenuAnimOut1 0.1s;
+  animation: MenuAnimOut1 0.2s;
+}
+
+.dl-menu.dl-animate-out-2 {
+  -webkit-animation: MenuAnimOut2 0.2s ease-in-out;
+  animation: MenuAnimOut2 0.2s ease-in-out;
+}
+
+.dl-menu.dl-animate-out-3 {
+  -webkit-animation: MenuAnimOut3 0.4s ease;
+  animation: MenuAnimOut3 0.4s ease;
+}
+
+.dl-menu.dl-animate-out-4 {
+  -webkit-animation: MenuAnimOut4 0.4s ease;
+  animation: MenuAnimOut4 0.4s ease;
+}
+
+.dl-menu.dl-animate-out-5 {
+  -webkit-animation: MenuAnimOut5 0.4s ease;
+  animation: MenuAnimOut5 0.4s ease;
+}
+
+@-webkit-keyframes MenuAnimOut1 {
+  0% { }
+  50% {
+
+  }
+  75% {
+
+    opacity: .5;
+  }
+  100% {
+
+    opacity: 0;
+  }
+}
+
+@-webkit-keyframes MenuAnimOut2 {
+  0% { }
+  100% {
+
+    opacity: 0;
+  }
+}
+
+@-webkit-keyframes MenuAnimOut3 {
+  0% { }
+  100% {
+
+    opacity: 0;
+  }
+}
+
+@-webkit-keyframes MenuAnimOut4 {
+  0% { }
+  100% {
+
+    opacity: 0;
+  }
+}
+
+@-webkit-keyframes MenuAnimOut5 {
+  0% { }
+  100% {
+
+    opacity: 0;
+  }
+}
+
+@keyframes MenuAnimOut1 {
+  0% { }
+  50% {
+
+  }
+  75% {
+
+    opacity: .5;
+  }
+  100% {
+
+    opacity: 0;
+  }
+}
+
+@keyframes MenuAnimOut2 {
+  0% { }
+  100% {
+
+    opacity: 0;
+  }
+}
+
+@keyframes MenuAnimOut3 {
+  0% { }
+  100% {
+
+    opacity: 0;
+  }
+}
+
+@keyframes MenuAnimOut4 {
+  0% { }
+  100% {
+
+    opacity: 0;
+  }
+}
+
+@keyframes MenuAnimOut5 {
+  0% { }
+  100% {
+
+    opacity: 0;
+  }
+}
+
+.dl-menu.dl-animate-in-1 {
+  -webkit-animation: MenuAnimIn1 0.3s;
+  animation: MenuAnimIn1 0.3s;
+}
+
+.dl-menu.dl-animate-in-2 {
+  -webkit-animation: MenuAnimIn2 0.3s ease-in-out;
+  animation: MenuAnimIn2 0.3s ease-in-out;
+}
+
+.dl-menu.dl-animate-in-3 {
+  -webkit-animation: MenuAnimIn3 0.4s ease;
+  animation: MenuAnimIn3 0.4s ease;
+}
+
+.dl-menu.dl-animate-in-4 {
+  -webkit-animation: MenuAnimIn4 0.4s ease;
+  animation: MenuAnimIn4 0.4s ease;
+}
+
+.dl-menu.dl-animate-in-5 {
+  -webkit-animation: MenuAnimIn5 0.4s ease;
+  animation: MenuAnimIn5 0.4s ease;
+}
+
+@-webkit-keyframes MenuAnimIn1 {
+  0% {
+    opacity: 0;
+  }
+  20% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes MenuAnimIn2 {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes MenuAnimIn3 {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes MenuAnimIn4 {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes MenuAnimIn5 {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes MenuAnimIn1 {
+  0% {
+    opacity: 0;
+  }
+  20% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes MenuAnimIn2 {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes MenuAnimIn3 {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes MenuAnimIn4 {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes MenuAnimIn5 {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.dl-menuwrapper > .dl-submenu.dl-animate-in-1 {
+  -webkit-animation: SubMenuAnimIn1 0.4s ease;
+  animation: SubMenuAnimIn1 0.4s ease;
+}
+
+.dl-menuwrapper > .dl-submenu.dl-animate-in-2 {
+  -webkit-animation: SubMenuAnimIn2 0.3s ease-in-out;
+  animation: SubMenuAnimIn2 0.3s ease-in-out;
+}
+
+.dl-menuwrapper > .dl-submenu.dl-animate-in-3 {
+  -webkit-animation: SubMenuAnimIn3 0.4s ease;
+  animation: SubMenuAnimIn3 0.4s ease;
+}
+
+.dl-menuwrapper > .dl-submenu.dl-animate-in-4 {
+  -webkit-animation: SubMenuAnimIn4 0.4s ease;
+  animation: SubMenuAnimIn4 0.4s ease;
+}
+
+.dl-menuwrapper > .dl-submenu.dl-animate-in-5 {
+  -webkit-animation: SubMenuAnimIn5 0.4s ease;
+  animation: SubMenuAnimIn5 0.4s ease;
+}
+
+@-webkit-keyframes SubMenuAnimIn1 {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes SubMenuAnimIn2 {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes SubMenuAnimIn3 {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes SubMenuAnimIn4 {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes SubMenuAnimIn5 {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes SubMenuAnimIn1 {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes SubMenuAnimIn2 {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes SubMenuAnimIn3 {
+  0% {
+    opacity: 0;
+  }
+  100% {
+
+    opacity: 1;
+  }
+}
+
+@keyframes SubMenuAnimIn4 {
+  0% {
+
+    opacity: 0;
+  }
+  100% {
+
+    opacity: 1;
+  }
+}
+
+@keyframes SubMenuAnimIn5 {
+  0% {
+
+    opacity: 0;
+  }
+  100% {
+
+    opacity: 1;
+  }
+}
+
+.dl-menuwrapper > .dl-submenu.dl-animate-out-1 {
+  -webkit-animation: SubMenuAnimOut1 0.4s ease;
+  animation: SubMenuAnimOut1 0.4s ease;
+}
+
+.dl-menuwrapper > .dl-submenu.dl-animate-out-2 {
+  -webkit-animation: SubMenuAnimOut2 0.3s ease-in-out;
+  animation: SubMenuAnimOut2 0.3s ease-in-out;
+}
+
+.dl-menuwrapper > .dl-submenu.dl-animate-out-3 {
+  -webkit-animation: SubMenuAnimOut3 0.4s ease;
+  animation: SubMenuAnimOut3 0.4s ease;
+}
+
+.dl-menuwrapper > .dl-submenu.dl-animate-out-4 {
+  -webkit-animation: SubMenuAnimOut4 0.4s ease;
+  animation: SubMenuAnimOut4 0.4s ease;
+}
+
+.dl-menuwrapper > .dl-submenu.dl-animate-out-5 {
+  -webkit-animation: SubMenuAnimOut5 0.4s ease;
+  animation: SubMenuAnimOut5 0.4s ease;
+}
+
+@-webkit-keyframes SubMenuAnimOut1 {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@-webkit-keyframes SubMenuAnimOut2 {
+  0% {
+
+    opacity: 1;
+  }
+  100% {
+
+    opacity: 0;
+  }
+}
+
+@-webkit-keyframes SubMenuAnimOut3 {
+  0% {
+
+    opacity: 1;
+  }
+  100% {
+
+    opacity: 0;
+  }
+}
+
+@-webkit-keyframes SubMenuAnimOut4 {
+  0% {
+
+    opacity: 1;
+  }
+  100% {
+
+    opacity: 0;
+  }
+}
+
+@-webkit-keyframes SubMenuAnimOut5 {
+  0% {
+
+    opacity: 1;
+  }
+  100% {
+
+    opacity: 0;
+  }
+}
+
+@keyframes SubMenuAnimOut1 {
+  0% {
+
+    opacity: 1;
+  }
+  100% {
+
+    opacity: 0;
+  }
+}
+
+@keyframes SubMenuAnimOut2 {
+  0% {
+
+    opacity: 1;
+  }
+  100% {
+
+    opacity: 0;
+  }
+}
+
+@keyframes SubMenuAnimOut3 {
+  0% {
+
+    opacity: 1;
+  }
+  100% {
+
+    opacity: 0;
+  }
+}
+
+@keyframes SubMenuAnimOut4 {
+  0% {
+
+    opacity: 1;
+  }
+  100% {
+
+    opacity: 0;
+  }
+}
+
+@keyframes SubMenuAnimOut5 {
+  0% {
+
+    opacity: 1;
+  }
+  100% {
+
+    opacity: 0;
+  }
+}
+
+/*----------------------------------------------------------------- TOOLS MENU */
+.ToolsMenu{
+  width: 60px;
+  height: auto;
+  position: absolute;
+  right: 8px;
+  padding:1em;
+  background-color: #fff;
+  top:  56px;
+  z-index: 40;
+  -webkit-box-shadow: 0px 2px 2px 0px rgba(50, 50, 50, 0.75);
+  -moz-box-shadow:    0px 2px 2px 0px rgba(50, 50, 50, 0.75);
+  box-shadow:         0px 2px 2px 0px rgba(50, 50, 50, 0.75);
+  display: none;
+}
+.ToolsMenu ul{
+  list-style: none;
+  margin:0; padding: 0;
+}
+.ToolsMenu ul li{
+  float: left; padding: 0;
+  margin-left: -9px;
+  margin-bottom: 0.5em;
+  line-height: 50px;
+  text-align: center;
+}
+.ToolsMenu ul li a{
+  display: block;
+  width: 50px; height: 50px;
+}
+.ToolsMenu ul li a img{
+  width: 45px; height: 45px;
+}
+.ToolsMenu ul li a:hover{
+  background: #2c3e50;
+}
+.ToolsMenu ul li.last{
+  margin-bottom: 0em;
+}
+#ToolBtns{
+  float: right;
+}
+@media (max-width: 768px) {
+    .col-sm-5 {
+        margin-top:20px;
+           }
+}
+
+/*----------------------------------------------------------------- MODAL  */
+
+.ModalBody {
+  display: none;
+  background-color: white;
+  position: absolute;
+  top: 0; left: 10px; right: 10px;
+  margin: auto;
+  margin-top: 32px;
+  margin-bottom:32px;
+  max-width: 800px; height: auto;
+  -webkit-box-shadow: 0px 0px 5px 0px rgba(50, 50, 50, 0.75);
+  -moz-box-shadow:    0px 0px 5px 0px rgba(50, 50, 50, 0.75);
+  box-shadow:         0px 0px 5px 0px rgba(50, 50, 50, 0.75);
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+}
+.ModalBody label{
+  font-size: 14px;
+  font-weight: 400;
+}
+.CloseModalBody {
+  display: none;
+  padding: 1em;
+  background-color: white;
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  margin: auto;
+  margin-top: 32px;
+  width: 300px; height: 100px;
+  text-align: center;
+  font-size: 16px;
+  -webkit-box-shadow: 0px 0px 5px 0px rgba(50, 50, 50, 0.75);
+  -moz-box-shadow:    0px 0px 5px 0px rgba(50, 50, 50, 0.75);
+  box-shadow:         0px 0px 5px 0px rgba(50, 50, 50, 0.75);
+}
+.ModalBodyTitle{
+  background-color: #F4F4F4;
+  border-bottom: 1px dotted #DADADA;
+  margin: 0; padding: 0;
+  -webkit-border-top-left-radius: 10px;
+  -webkit-border-top-right-radius: 10px;
+  -moz-border-radius-topleft: 10px;
+  -moz-border-radius-topright: 10px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+.ModalBodyTitle h1{
+  margin: 0; padding: 10px;
+  font-size: 14px;
+  color: #ffffff;
+}
+
+.confirmacion-modal
+{
+  max-width: 350px; height: auto
+}
+
+.confirmacion-modal-title h1{
+  margin: 0; padding: 10px;
+  font-size: 13px;
+}
+
+
+.ModalBodyContent{
+  padding: 1em;
+}
+.ModalBtn{
+  position: relative;
+  display: inline-block;
+  height: 40px; width: 80px;
+  text-align: center;
+  margin: auto;
+  left: 0; right: 0;
+  font-size: 16px;
+  line-height: 40px;
+  background-color: #EBEBEB;
+  border:1px solid #c9c9c9;
+  color: #7A7A7A;
+  margin-top: 10px; margin-right: 10px;
+}
+.ModalBtn:hover{
+  color: #5C5C5C;
+  cursor: pointer;
+}
+
+#cmbSucursalID_Movil
+{
+  position:relative;
+   margin-top: 10px;
+}
+
+.btn-informativo
+{
+  font-size:30px;
+  background-color:transparent;
+}
+
+
+
+.dropdown-menu{
+  top: 58px;
+}
+.dropdown-menu:before {
+  position: absolute;
+  top: -7px;
+  right: 9px;
+  display: inline-block;
+  border-right: 7px solid transparent;
+  border-bottom: 7px solid #ccc;
+  border-left: 7px solid transparent;
+  border-bottom-color: rgba(0, 0, 0, 0.2);
+  content: '';
+}
+
+.dropdown-menu:after {
+  position: absolute;
+  top: -6px;
+  right: 14px;
+  display: inline-block;
+  border-right: 6px solid transparent;
+  border-bottom: 6px solid #ffffff;
+  border-left: 6px solid transparent;
+  content: '';
+}
+
+
+.Widget{
+  color: #696969 !important;
+  padding: 0.5em;
+}
+.Widget li p{
+  padding: 0 !important; margin: 0 !important;
+  border:none !important;
+  font-size: 14px !important;
+  background-color: transparent !important;
+  font-weight: 400 !important;
+  line-height: 18px !important;
+
+
+}
+.Widget li p span{
+  font-weight: 700 !important;
+  font-size: 14px !important;
+   
+}
+
+
+
+/*----------------------------------------------------------------- PANEL  */
+.panel-toolbar{
+  position: relative;
+  z-index: 3;
+}
+
+.panel-modal-sin-barra{
+  position: relative;
+  z-index: 3;
+}
+
+.panel{
+  border:none;
+}
+.panel-toolbar{
+  height: auto;
+  background-color: #EBEBEB;
+  border-bottom: 1px solid #DADADA;
+  color:white;
+  padding: 1em;
+  color: #000000;
+}
+.panel-toolbar ul{
+  list-style: none;
+}
+.panel-toolbar ul li{
+  display: inline-block;
+  margin-left: 1em; margin-top: 2px;
+}
+.panel-toolbar ul li a{
+  width: 18px; height: 18px;
+  text-align: center;
+  line-height: 24px;
+  color: #8C9495;
+  font-size: 18px;
+  font-weight: 400;
+}
+.panel-toolbar ul li a:hover{
+  color: #6C7273;
+  cursor: pointer;
+}
+
+.panel-modal-sin-barra{
+  height: auto;
+  background-color: #FFFFFF;
+  color:white;
+  padding: 1em;
+  color: #000000;
+}
+.panel-content{
+  margin-top: 2em;
+}
+
+/*Quitar div */
+.no-mostrar{display: none;}
+
+/*Cambiar color texto a transparente */
+.lbl-transparente{color: transparent;}
+
+/*Clases que se utilizan para cambiar la posición de los checkbox y radio butons del catálogo proveedores-contabilidad */
+.rbt-habilitar-opc2{
+  position: relative;
+  top: -10px;
+}
+
+.rbt-habilitar-opc3{
+  position: relative;
+  top: -27px;
+}
+
+.rbt-habilitar-opc4{
+  position: relative;
+  top: -44px;
+}
+
+.rbt-habilitar-opc5{
+  position: relative;
+  top: -59px;
+}
+
+.rbt-habilitar-opc6{
+  position: relative;
+  top: -78px;
+}
+
+.rbt-habilitar-opc7{
+  position: relative;
+  top: -95px;
+}
+
+
+.rbt-habilitar-opc8{
+  position: relative;
+  top: -110px;
+}
+
+
+/*div parte inferior del modal*/
+.footerModal{
+  float: right !important;
+  height:45px;
+}
+
+.container-fluid label
+ {
+   font-weight: normal;
+   font-size: 14px;
+ }
+
+.panel-toolbar label
+ {
+    font-weight: normal;
+    font-size: 14px;
+    color: #000;
+ }
+
+ .panel-modal-sin-barra label
+ {
+    font-weight: normal;
+    font-size: 14px;
+ }
+
+#lblEstatus
+{
+  color:#093D6C;
+  font-size: 14px;
+}
+
+.lbl-usuario
+{
+  padding-left: 15px;
+  margin:5px 0 0 0;
+  font-size: 11px;
+}
+
+.btn-toolBtns
+{
+  margin:25px 0 0 0;
+}
+
+.btn-cerrar
+{
+  background-color: #B5C9DC;
+}
+
+#divEspacioVacioMovil
+{
+  height: 5em;
+}
+
+
+.fileinput-button {
+    position: relative;
+    overflow: hidden;
+}
+.fileinput-button input {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0;
+    opacity: 0;
+    filter: alpha(opacity=0);
+    transform: translate(-300px, 0) scale(4);
+    font-size: 23px;
+    direction: ltr;
+    cursor: pointer;
+}
+
+/*Clase que se utiliza para cambiar el color del icono mensaje, de esta manera será más facil identificar la existencia de nuevos mensajes*/
+.mensajes-NUEVOS
+{
+   color: #c69f54;
+}
+
+/*Clases que se utilizan para cambiar el color del encabezado de un  modal, dependiendo del estatus del registro*/
+.estatus-NUEVO
+{
+  background-color: #8d8c8e;
+  color:#ffffff;
+}
+
+.estatus-ACTIVO
+{
+  background-color: #428bca;
+  color:#ffffff;
+}
+
+.estatus-INACTIVO
+{
+  background-color: #a94442;
+  color:#ffffff;
+}
+
+.estatus-SOLICITAR_DEVOLUCION
+{
+  background-color: #dfb117;
+  color:#ffffff;
+}
+
+.estatus-DEVOLUCION
+{
+  background-color: #ea7616;
+  color:#ffffff;
+}
+
+.estatus-ABIERTA
+{
+  background-color: #428bca;
+  color:#ffffff;
+}
+
+.estatus-CERRADA
+{
+  background-color: #439CC8;
+  color:#ffffff;
+}
+
+.estatus-CANCELADA
+{
+  background-color: #a94442;
+  color:#ffffff;
+}
+
+.estatus-VALIDACION
+{
+  background-color: #dfb117;
+  color:#ffffff;
+}
+
+.estatus-RECHAZADO
+{
+  background-color: #ea7616;
+  color:#ffffff;
+}
+
+.estatus-AUTORIZADO
+{
+  background-color: #6f42c1;
+  color:#ffffff;
+}
+
+.estatus-FINALIZADO
+{
+  background-color: #6f42c1;
+  color:#ffffff;
+}
+
+.estatus-CERRADO
+{
+  background-color: #439CC8;
+  color:#ffffff;
+}
+
+.estatus-SUSPENDIDO
+{
+  background-color: #ea7616;
+  color:#ffffff;
+}
+
+.estatus-PEDIDO
+{
+  background-color: #dfb117;
+  color:#ffffff;
+}
+
+.estatus-REMISION
+{
+  background-color: #E6A057;
+  color:#ffffff;
+}
+
+
+.estatus-FACTURADO
+{
+  background-color: #439CC8;
+  color:#ffffff;
+}
+
+.estatus-TIMBRAR
+{
+  background-color: #6f42c1;
+  color:#ffffff;
+}
+
+.estatus-PARCIALMENTE_SURTIDO
+{
+  background-color: #dfb117;
+  color:#ffffff;
+}
+
+.estatus-PARCIAL
+{
+  background-color: #dfb117;
+  color:#ffffff;
+}
+
+.estatus-PARCIALMENTE_APLICADO
+{
+  background-color: #dfb117;
+  color:#ffffff;
+}
+
+.estatus-NO_APLICADA
+{
+  background-color: #dfb117;
+  color:#ffffff;
+}
+
+
+.estatus-SURTIDO
+{
+  background-color: #439CC8;
+  color:#ffffff;
+}
+
+.estatus-APLICADO
+{
+  background-color: #439CC8;
+  color:#ffffff;
+}
+
+.mensaje-NUEVO
+{
+  background-color: #c69f54;
+  color:#ffffff;
+}
+
+.mensaje-VISTO
+{
+  background-color: #686868;
+  color:#ffffff;
+}
+
+/*Clases que se utilizan para cambiar el color de los renglones del grid dependiedo del estatus o tipo*/
+.registro-INACTIVO
+{
+  background-color: #f2dede;
+}
+
+.registro-SOLICITAR_DEVOLUCION
+{
+  background-color: #e0cd8c;
+}
+
+.registro-DEVOLUCION
+{
+  background-color: #f1a566;
+}
+
+.registro-CERRADA
+{
+  background-color: #6BB1D3;
+}
+
+.registro-CANCELADA
+{
+  background-color: #f2dede;
+}
+
+.registro-SUSPENDIDO
+{
+  background-color: #f1a566;
+}
+
+.registro-RECHAZADO
+{
+  background-color: #f1a566;
+}
+
+.registro-AUTORIZADO
+{
+  background-color: #a194bb;
+}
+
+.registro-FINALIZADO
+{
+  background-color: #a194bb;
+}
+
+.registro-CERRADO
+{
+  background-color: #6BB1D3;
+}
+
+
+.registro-PRIORIDAD
+{
+  background-color: #e0cd8c;
+}
+
+.registro-URGENTE
+{
+  background-color: #f1a566;
+}
+
+.registro-PEDIDO
+{
+  background-color: #e0cd8c;
+}
+
+
+.registro-REMISION
+{
+  background-color: #E68723;
+}
+
+.registro-FACTURADO
+{
+  background-color: #6BB1D3;
+}
+
+.registro-TIMBRAR
+{
+  background-color: #a194bb;
+}
+
+.registro-PARCIALMENTE_SURTIDO
+{
+  background-color: #e0cd8c;
+}
+
+.registro-PARCIAL
+{
+  background-color: #e0cd8c;
+}
+
+.registro-PARCIALMENTE_APLICADO
+{
+  background-color: #e0cd8c;
+}
+
+.registro-NO_APLICADA
+{
+  background-color: #e0cd8c;
+}
+
+.registro-SURTIDO
+{
+  background-color: #6BB1D3;
+}
+
+.registro-APLICADO
+{
+  background-color: #6BB1D3;
+}
+
+
+/*Deshabilitar tab*/
+.disabledTab {
+    pointer-events: none;
+}
+
+.centrar-barra-progreso {
+   position: absolute;
+   top: 50%;
+   left: 50%;
+   margin-top: -75px;
+   margin-left: -75px;
+} 
+
+
+/* Ocultar la casilla de verificación, pero permitir que se enfoque */
+.badgebox
+{
+    opacity: 0;
+}
+
+.badgebox + .badge
+{
+    /* Mover la marca de verificación cuando no esté seleccionada */
+    text-indent: -999999px;
+    /* Hace que el ancho del botón permanezca igual que el seleccionado y que no esté marcado */
+  width: 27px;
+}
+
+.badgebox:focus + .badge
+{
+    /* Establecer algo para que la insignia se vea enfocada */
+    /* Adición de un borde ligero*/
+    box-shadow: inset 0px 0px 5px;
+}
+
+.badgebox:checked + .badge
+{
+    /* Mover la marca de verificación cuando esté marcada */
+  text-indent: 0;
+
+}
+
+#btnIngresar:active{
+   background: -webkit-linear-gradient(left, rgba(212,228,239,1) 0%, rgba(134,174,204,1) 100%);
+}
+
+#btnIngresar:hover {
+  background: #2c3e50;
+  color:white;
+}
+
+/*Clase que se utilizan para mostrar correctamente el calendario en el modal (así se evitará que cambie de posición y permita seleccionar un día)*/
+.datepicker { 
+      width:19em;
+     top: 100;
+     position:absolute;
+     z-index:100;
+    background-color:white;
+    left: -1px;
+}
+
+/*Clase que se utiliza para mostrar correctamente el mensaje de validación en el control datetimepicker*/
+#divFechaMsjValidacion .form-control-feedback {
+    top: 0;
+    right: -9px;
+}
+
+/*Clase que se utiliza para mostrar correctamente el mensaje de validación en el control combobox*/
+#divCmbMsjValidacion .form-control-feedback {
+    top: 0;
+    right: -15px;
+}
+
+/*Clases para personalizar apariencia de checkbox y radio button*/
+#label-checkbox{
+  padding-left: 3px;
+}
+.checkbox label:after, 
+.radio label:after {
+    content: '';
+    display: table;
+    clear: both;
+}
+
+.checkbox .cr,
+.radio .cr {
+    position: relative;
+    display: inline-block;
+    border: 1px solid #a9a9a9;
+    border-radius: .25em;
+    width: 1.3em;
+    height: 1.3em;
+    float: left;
+    margin-right: .5em;
+    background-color: #ffffff;
+}
+
+.radio .cr {
+    border-radius: 50%;
+}
+
+.checkbox .cr .cr-icon,
+.radio .cr .cr-icon {
+    position: absolute;
+    font-size: .8em;
+    line-height: 0;
+    top: 50%;
+    left: 4%;
+}
+
+.radio .cr .cr-icon {
+    margin-left: 0.04em;
+}
+
+.checkbox label input[type="checkbox"],
+.radio label input[type="radio"] {
+    display: none;
+
+}
+
+.checkbox label input[type="checkbox"] + .cr > .cr-icon,
+.radio label input[type="radio"] + .cr > .cr-icon {
+    transform: scale(3) rotateZ(-20deg);
+    opacity: 0;
+    transition: all .3s ease-in;
+}
+
+.checkbox label input[type="checkbox"]:checked + .cr > .cr-icon,
+.radio label input[type="radio"]:checked + .cr > .cr-icon {
+    transform: scale(1) rotateZ(0deg);
+    opacity: 1;
+}
+
+.checkbox label input[type="checkbox"]:disabled + .cr,
+.radio label input[type="radio"]:disabled + .cr {
+    opacity: .5;
+}
+
+.tdCont{
+  background-color: #fff !important;
+  padding: 8px;
+  line-height: 1.42857143;
+  vertical-align: top;
+  border-top: 1px solid #ddd;
+}
+
+.tablaDet
+{
+   width: 100%;
+   text-align: left;
+   margin: 0 0 1em 0;
+   caption-side: top;
+   border-collapse: collapse;
+}          
+
+.divContenedorCampos
+{
+  
+  position: relative;
+  top: -20px;
+}
+
+
+
+th.movil { 
+  color: white; 
+  font-weight: bold; 
+}
+td.movil, th.movil { 
+  padding: 6px; 
+  border: 1px solid #ccc; 
+  text-align: left; 
+}
+
+/* Force table to not be like tables anymore */
+table.movil, thead.movil, tbody.movil, tfoot.movil, th.movil, td.movil, tr.movil {
+  display: block;
+}
+
+/* Hide table headers (but not display: none;, for accessibility) */
+thead.movil tr.movil {
+  position: absolute;
+  top: -9999px;
+  left: -9999px;
+}
+
+tr.movil { border: 1px solid #ccc; }
+
+td.movil {
+  /* Behave  like a "row" */
+  border: none;
+  border-bottom: 1px solid #eee;
+  position: relative;
+  padding-left: 50%;
+  cursor: pointer;
+}
+
+td.movil-no-mostrar {
+  display: none;
+}
+
+td.movil:before {
+  /* Now like a table header */
+  position: absolute;
+  /* Top/left values mimic padding */
+  top: 6px;
+  left: 6px;
+  width: 45%;
+  padding-right: 10px;
+  white-space: nowrap;
+}
+
+.glyphicon
+{
+   cursor: pointer;
+}
+
+.fa
+{
+   cursor: pointer;
+}
+
+/*Clases que se utilizan para la conversación (chat) de mensajes */
+.conversacion {
+  height: calc(100% - 12px);
+  position: relative;
+  background: #efe7dd;
+  z-index: 0;
+}
+
+.conversacion ::-webkit-scrollbar {
+  transition: all .5s;
+  width: 5px;
+  height: 1px;
+  z-index: 10;
+}
+
+.conversacion ::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.conversacion ::-webkit-scrollbar-thumb {
+  background: #b3ada7;
+}
+
+.conversacion .conversacion-container {
+  height: calc(100% - 68px);
+  box-shadow: inset 0 10px 10px -10px #000000;
+  overflow-x: hidden;
+  padding: 0 16px;
+  margin-bottom: 5px;
+}
+
+.conversacion .conversacion-container:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+
+/* Mensajes */
+.mensaje {
+  color: #000;
+  clear: both;
+  line-height: 18px;
+  font-size: 15px;
+  padding: 8px;
+  position: relative;
+  margin: 8px 0;
+  max-width: 85%;
+  word-wrap: break-word;
+  z-index: -1;
+}
+
+.mensaje:after {
+  position: absolute;
+  content: "";
+  width: 0;
+  height: 0;
+  border-style: solid;
+}
+
+.metadata {
+  display: inline-block;
+  float: right;
+  padding: 0 0 0 7px;
+  position: relative;
+  bottom: -4px;
+}
+
+.metadata .time {
+  color: rgba(0, 0, 0, .45);
+  font-size: 11px;
+  display: inline-block;
+}
+
+.metadata .tick {
+  display: inline-block;
+  margin-left: 2px;
+  position: relative;
+  top: 4px;
+  height: 16px;
+  width: 16px;
+}
+
+.metadata .tick svg {
+  position: absolute;
+  transition: .5s ease-in-out;
+}
+
+.metadata .tick svg:first-child {
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+  -webkit-transform: perspective(800px) rotateY(180deg);
+          transform: perspective(800px) rotateY(180deg);
+}
+
+.metadata .tick svg:last-child {
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+  -webkit-transform: perspective(800px) rotateY(0deg);
+          transform: perspective(800px) rotateY(0deg);
+}
+
+.metadata .tick-animation svg:first-child {
+  -webkit-transform: perspective(800px) rotateY(0);
+          transform: perspective(800px) rotateY(0);
+}
+
+.metadata .tick-animation svg:last-child {
+  -webkit-transform: perspective(800px) rotateY(-179.9deg);
+          transform: perspective(800px) rotateY(-179.9deg);
+}
+
+.mensaje:first-child {
+  margin: 16px 0 8px;
+}
+
+.mensaje.recibido {
+  background: #fff;
+  border-radius: 0px 5px 5px 5px;
+  float: left;
+}
+
+.mensaje.recibido .metadata {
+  padding: 0 0 0 16px;
+}
+
+.mensaje.recibido:after {
+  border-width: 0px 10px 10px 0;
+  border-color: transparent #fff transparent transparent;
+  top: 0;
+  left: -10px;
+}
+
+.mensaje.enviado {
+  background: #e1ffc7;
+  border-radius: 5px 0px 5px 5px;
+  float: right;
+}
+
+.mensaje.enviado:after {
+  border-width: 0px 0 10px 10px;
+  border-color: transparent transparent transparent #e1ffc7;
+  top: 0;
+  right: -10px;
+}
+
+.circulo_bar
+{
+    position: absolute;
+    /*nos posicionamos en el centro del navegador*/
+    top:50%;
+    left:40%;
+    padding:5px;
+}
+
+.ventas_mes_importe
+{
+  min-width: 92px;
+}
